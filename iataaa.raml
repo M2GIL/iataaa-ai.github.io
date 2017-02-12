@@ -1,0 +1,73 @@
+#%RAML 1.0
+title: Iataaa AI
+version: v1.0
+mediaType: application/json
+documentation :
+- title : Home
+  content: Web service containing artificial intelligence to game checkers.
+
+traits:
+  secured :
+    queryParameters:
+      token :
+        description: It's authentication token given to API by plateforme before it started.
+        type : string
+    responses :
+      401 :
+        description: Unauthorized. Token is bad.
+
+uses:
+  GameLibrary : types/GameLibrary.raml
+
+/ai/status :
+  get :
+    description: Get Status.
+    is : secured
+    responses :
+      200 :
+        body:
+          application/json :
+            type : GameLibrary.StatusResponse
+
+
+/ai/games :
+  /start :
+    get :
+      description: Start game with difficulty and player number.
+      is : secured
+      queryParameters:
+        difficulty : GameLibrary.Difficulty
+        player : GameLibrary.Player
+      responses :
+        200 :
+          body:
+            application/json:
+              type : GameLibrary.StartResponse
+
+
+  /play/{gameId} :
+    get :
+      description: Movement request to AI.
+      is : secured
+      queryParameters:
+        difficulty : GameLibrary.Difficulty
+        player : GameLibrary.Player
+        board : GameLibrary.Board
+      responses :
+        200 :
+          body:
+            application/json:
+              type : GameLibrary.PlayResponse
+
+  /end/{gameId} :
+    get :
+      description: End game information.
+      is : secured
+      queryParameters:
+        winner : GameLibrary.Player
+        code : GameLibrary.CodeEndGame
+      responses :
+        200 :
+          body:
+            application/json :
+              type : GameLibrary.StatusResponse

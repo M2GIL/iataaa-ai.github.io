@@ -1,0 +1,119 @@
+#%RAML 1.0 Library
+
+types :
+#---------------------
+# TYPES
+#---------------------
+  Status :
+    type : string
+    enum : [BUSY, AVAILABLE]
+
+  Difficulty :
+    type : string
+    enum : [EASY, MEDIUM, HARD]
+
+  Player :
+    type : string
+    enum : [J1, J2, DRAW]
+
+  Case :
+    type : integer
+    description: It's pawn code. 0 = EMPTY, 1 = BLACK PWAN, 2 = BLACK KING, 3 = WHITE PWAN and 4 = WHITE KING.
+    minimum: 0
+    maximum: 4
+
+  CodeEndGame :
+    type : string
+    enum : [ TIMEOUT, SURRENDER, CLASSICAL ]
+
+  Board :
+    description: Board string representation. 0 = EMPTY, 1 = BLACK PWAN, 2 = BLACK KING, 3 = WHITE PWAN and 4 = WHITE KING.
+    type : string
+    pattern: "[0-4]{50}"
+    example: "11111111111111111111000000000033333333333333333333"
+#---------------------
+# RESPONSE TYPES
+#---------------------
+
+  StatusResponse :
+    type : object
+    properties:
+      token : string
+      status : Status
+    example:
+      token : pfjzEgpgD456D5rz8SR
+      status : AVAILABLE
+
+  StartResponse :
+    type : object
+    properties:
+      token : string
+      status : Status
+      game_id : string
+    example:
+      token : pfjzEgpgD456D5rz8SR
+      status : AVAILABLE
+      game_id : fhzej4456hzFDfjzpo
+
+  PlayResponse :
+    type : object
+    properties:
+      token : string
+      status : Status
+      difficulty : Difficulty
+      board : Case[]
+    example:
+      token : pfjzEgpgD456D5rz8SR
+      status : AVAILABLE
+      difficulty: HARD
+      board:
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 3
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 3
+        - 3
+        - 3
+        - 3
+        - 3
+        - 3
+        - 3
+        - 3
+        - 3
+        - 3
+        - 3
+        - 3
+        - 3
+        - 3
+        - 3
+        - 3
+        - 3
+        - 3
+        - 3
