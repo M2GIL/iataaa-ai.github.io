@@ -46,6 +46,10 @@ uses:
 
 
   /play/{gameId} :
+    uriParameters:
+      gameId :
+        type : string
+        description: Game id.
     get :
       description: Movement request to AI.
       is : secured
@@ -60,6 +64,10 @@ uses:
               type : GameLibrary.PlayResponse
 
   /end/{gameId} :
+    uriParameters:
+      gameId :
+        type : string
+        description: Game id.
     get :
       description: End game information.
       is : secured
